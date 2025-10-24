@@ -1,25 +1,25 @@
-AWSTemplateFormatVersion: '2010-09-09'
-Transform: AWS::Serverless-2016-10-31
-Description: A simple AWS SAM template for a Lambda function
-Resources:
-  HelloWorldFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: app.lambda_handler
-      Runtime: python3.11
-      CodeUri: ./
-      Description: A simple AWS Lambda function that returns a JSON response.
-      MemorySize: 128
-      Timeout: 3
-      Policies:
-        - AWSLambdaBasicExecutionRole
-      Events:
-        HelloWorld:
-          Type: Api
-          Properties:
-            Path: /hello
-            Method: get
-Outputs:
-  HelloWorldFunctionArn:
-    Description: "ARN of HelloWorldFunction"
-    Value: !GetAtt HelloWorldFunction.Arn
+AWSTemplateFormatVersion: '2010-09-09' # CloudFormation template version
+Transform: AWS::Serverless-2016-10-31 # Enables the AWS SAM transform
+Description: A simple AWS SAM template for a Lambda function that returns a JSON response.
+Resources: # AWS resources definitions
+  HelloWorldFunction: # Logical name of the Lambda function
+    Type: AWS::Serverless::Function # SAM resource type for a Lambda function
+    Properties: # Lambda function properties
+      Handler: app.lambda_handler # Function entry point (file.function)
+      Runtime: python3.11 # Runtime environment
+      CodeUri: . # Directory containing the source code
+      Description: A simple AWS Lambda function that returns a JSON response. # Function description
+      MemorySize: 128 # Memory size in MB
+      Timeout: 3 # Maximum execution time in seconds
+      Policies: # IAM policies attached to the function
+        - AWSLambdaBasicExecutionRole # Basic execution policy for Lambda (CloudWatch logs)
+      Events: # Trigger definitions
+        HelloWorld: # Logical name of the event
+          Type: Api # API Gateway trigger
+          Properties: 
+            Path: /hello # API path
+            Method: get # HTTP method
+Outputs: # CloudFormation stack outputs
+  HelloWorldFunctionArn: # Logical name of the output
+    Description: "ARN of HelloWorldFunction" # Output description
+    Value: !GetAtt HelloWorldFunction.Arn # Output value (Lambda function ARN)
