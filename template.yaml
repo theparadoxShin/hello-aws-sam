@@ -23,3 +23,6 @@ Outputs: # CloudFormation stack outputs
   HelloWorldFunctionArn: # Logical name of the output
     Description: "ARN of HelloWorldFunction" # Output description
     Value: !GetAtt HelloWorldFunction.Arn # Output value (Lambda function ARN)
+  ApiUrl: # Logical name of the output
+    Description: "API Gateway endpoint URL" # Output description
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello" # Output value (API endpoint URL)
